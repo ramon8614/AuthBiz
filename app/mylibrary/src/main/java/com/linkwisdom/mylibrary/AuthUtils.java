@@ -18,8 +18,13 @@ import android.content.Intent;
 public class AuthUtils {
 
     public static final int AUTH_APPLY = 901;
+    private Activity activity;
 
-    public void authApply(Activity activity, String appName) {
+    public AuthUtils(Activity activity) {
+        this.activity = activity;
+    }
+
+    public void authApply(String appName) {
 
         //详细设置跳转
         Intent sendIntent = new Intent();
@@ -30,6 +35,10 @@ public class AuthUtils {
 //                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         sendIntent.putExtra("appName", appName);
         activity.startActivityForResult(sendIntent, AUTH_APPLY);
+    }
+
+    public void checkToken(){
+
     }
 
 }
