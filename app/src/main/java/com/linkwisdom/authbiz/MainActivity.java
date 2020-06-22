@@ -93,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
 
+            if (requestCode == AuthUtils.RECHARGE_APPLY) {
+                boolean isSuccess = data.getBooleanExtra("result", false);
+            }
+
         }
 
     }
