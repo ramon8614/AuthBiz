@@ -3,6 +3,8 @@ package com.linkwisdom.mylibrary.http;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Callback;
+
 /**
  * @ProjectName: NBN
  * @ClassName: Bizs
@@ -22,10 +24,10 @@ public class BizsImp extends BaseBiz {
      * @param token
      * @param type
      */
-    public void checkToken(String token, String type, MyCallBack callBack) {
+    public void checkToken(String type, String token, String userAddress, Callback callBack) {
         Map<String, String> map = new HashMap<>();
-        map.put("loginType", "1");
-        postJsonWithToken(Constant.checkToken, map, token, callBack);
+        map.put("loginType", type);
+        postJsonWithToken(Constant.checkToken, map, token, userAddress,callBack);
     }
 
 }

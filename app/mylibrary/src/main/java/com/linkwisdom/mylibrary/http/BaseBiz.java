@@ -142,7 +142,7 @@ public class BaseBiz extends Constant {
      * @param token
      * @param paramCallback
      */
-    public void postJsonWithToken(String url, Map<String, String> map, String token, Callback paramCallback) {
+    public void postJsonWithToken(String url, Map<String, String> map, String token, String userAddress,Callback paramCallback) {
 
         JSONObject jsonObj = new JSONObject();
 
@@ -172,6 +172,7 @@ public class BaseBiz extends Constant {
                 .addHeader("device", "android")
                 .addHeader("os", "android")
                 .addHeader("authorization", token)
+                .addHeader("userAddress", userAddress)
                 .addHeader("timestamp", String.valueOf(System.currentTimeMillis()))
                 .url(Constant.BASE_URL + url)
                 .post(body)

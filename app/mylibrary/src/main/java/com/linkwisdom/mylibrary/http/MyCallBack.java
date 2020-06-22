@@ -26,13 +26,14 @@ public class MyCallBack implements Callback {
     }
 
     @Override
-    public void onFailure(Call call, IOException e) {
+    public void onFailure(Call call, final IOException e) {
 
         act.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 onResp();
-                Toast.makeText(act, "连接超时", Toast.LENGTH_SHORT).show();
+                Log.e("ramon", "请求异常： " + e.toString());
+                Toast.makeText(act, "请求失败 ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -49,7 +50,7 @@ public class MyCallBack implements Callback {
         });
 
         if (response.body() == null) {
-            Log.e("ramong", "onResponse: " + "请求返回原始数据为空");
+            Log.e("ramon", "onResponse: " + "请求返回原始数据为空");
             return;
         }
 
@@ -68,13 +69,25 @@ public class MyCallBack implements Callback {
         }
 
 //        final ResponseEntity entity = GsonUtil.parseJsonWithGson(res, ResponseEntity.class);
-        ResponseBean ogbean;
+        final ResponseBean ogbean;
         ogbean = GsonUtil.parseJsonWithGson(res, ResponseBean.class);
 
-        if (ogbean.code == 1000) {
-            onSuccess(ogbean.data);
+        if (ogbean.code == 200) {
+            act.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    onSuccess(ogbean.data);
+                }
+            });
+
         } else {
-            onFailed(ogbean.message);
+            act.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    onFailed(ogbean.message);
+                }
+            });
+
         }
 
     }
