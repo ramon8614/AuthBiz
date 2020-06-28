@@ -95,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (requestCode == AuthUtils.RECHARGE_APPLY) {
                 boolean isSuccess = data.getBooleanExtra("result", false);
+                String order = data.getStringExtra("consumptionCode");
+                double fee = data.getDoubleExtra("fee", 0d);
+                double pay = data.getDoubleExtra("pay", 0d);
+                Log.e("ramon", isSuccess + "order:  " + order + " fee: " + fee + " pay: " + pay);
             }
 
         }
