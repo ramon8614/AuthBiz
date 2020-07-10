@@ -7,7 +7,7 @@ public class ResponseBean {
 //    {"code": 1000, "message": "ok", data: {}}
 
     public int code;
-    public String message;
+    public String msg;
     public JsonElement data;
 
 }

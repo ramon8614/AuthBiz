@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.linkwisdom.mylibrary.http.Constant;
+
 /**
  * @ProjectName: NBN
  * @ClassName: AuthUtils
@@ -23,6 +25,20 @@ public class AuthUtils {
 
     public AuthUtils(Activity activity) {
         this.activity = activity;
+    }
+
+    public AuthUtils(Activity activity, int server) {
+        this.activity = activity;
+        setServer(server);
+    }
+
+    /**
+     * 设置服务器
+     *
+     * @param server
+     */
+    public void setServer(int server) {
+        Constant.setService(server);
     }
 
     /**

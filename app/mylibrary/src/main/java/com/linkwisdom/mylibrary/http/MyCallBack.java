@@ -84,7 +84,7 @@ public class MyCallBack implements Callback {
             act.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    onFailed(ogbean.message);
+                    onFailed(ogbean.msg);
                 }
             });
 

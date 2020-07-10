@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        au = new AuthUtils(this);
+        au = new AuthUtils(this, 1);
 
         Button bt1 = findViewById(R.id.authBt);
         Button bt2 = findViewById(R.id.rachargeBt);
@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("ramon", messgae);
 //                        Toast.makeText(MainActivity.this, "token 已失效", Toast.LENGTH_SHORT).show();
                     }
-
-
                 });
             }
 
