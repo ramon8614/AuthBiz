@@ -64,7 +64,7 @@ public class AuthUtils {
     }
 
 
-    public void rechargeApply(String token, int point, String chargeText) {
+    public void rechargeApply(String token, int point, String chargeText, String callbackUrl) {
 
         //详细设置跳转
         Intent sendIntent = new Intent();
@@ -75,6 +75,7 @@ public class AuthUtils {
         sendIntent.putExtra("token", token);
         sendIntent.putExtra("point", point);
         sendIntent.putExtra("description", chargeText);
+        sendIntent.putExtra("callbackUrl", callbackUrl);
         activity.startActivityForResult(sendIntent, RECHARGE_APPLY);
     }
 

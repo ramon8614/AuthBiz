@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.JsonElement;
 import com.linkwisdom.mylibrary.AuthUtils;
 import com.linkwisdom.mylibrary.http.BizsImp;
+import com.linkwisdom.mylibrary.http.Constant;
 import com.linkwisdom.mylibrary.http.MyCallBack;
 
 import java.io.IOException;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        au = new AuthUtils(this, 1);
+        au = new AuthUtils(this, Constant.DEBUG_SERVER);
 
         Button bt1 = findViewById(R.id.authBt);
         Button bt2 = findViewById(R.id.rachargeBt);

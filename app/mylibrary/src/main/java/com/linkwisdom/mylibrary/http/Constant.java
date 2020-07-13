@@ -1,7 +1,5 @@
 package com.linkwisdom.mylibrary.http;
 
-import com.linkwisdom.mylibrary.R;
-
 /**
  * @ProjectName: NBN
  * @ClassName: Constant
