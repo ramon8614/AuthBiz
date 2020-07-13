@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //                sendIntent.putExtra("key", "66d26512fa77cc5ff934201903dd7482");//测试环境
 //        sendIntent.putExtra("key", "a6492c181a133355fcee1de3a8d12f15");//生产环境
 
-                au.rechargeApply(token, 500, "王者农药充值");
+                au.rechargeApply(token, 500, "王者农药充值","");
 
             }
         });
