@@ -21,6 +21,7 @@ public class AuthUtils {
 
     public static final int AUTH_APPLY = 901;
     public static final int RECHARGE_APPLY = 905;
+    public static final int WITHDRAW_APPLY = 906;
     private Activity activity;
 
     public AuthUtils(Activity activity) {
@@ -63,7 +64,14 @@ public class AuthUtils {
         activity.startActivityForResult(sendIntent, AUTH_APPLY);
     }
 
-
+    /**
+     * 充值跳转请求
+     *
+     * @param token
+     * @param point
+     * @param chargeText
+     * @param callbackUrl
+     */
     public void rechargeApply(String token, int point, String chargeText, String callbackUrl) {
 
         //详细设置跳转
@@ -77,6 +85,27 @@ public class AuthUtils {
         sendIntent.putExtra("description", chargeText);
         sendIntent.putExtra("callbackUrl", callbackUrl);
         activity.startActivityForResult(sendIntent, RECHARGE_APPLY);
+    }
+
+    /**
+     * 提现跳转请求
+     *
+     * @param token
+     * @param address
+     * @param callbackUrl
+     */
+    public void withdrawApply(String token, String address, String callbackUrl) {
+
+        //详细设置跳转
+        Intent sendIntent = new Intent();
+        sendIntent.setAction("com.lianzhihui.five.withdraw");
+        String type = "text/plain";
+        sendIntent.setType(type);
+//                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        sendIntent.putExtra("token", token);
+        sendIntent.putExtra("address", address);
+        sendIntent.putExtra("callbackUrl", callbackUrl);
+        activity.startActivityForResult(sendIntent, WITHDRAW_APPLY);
     }
 
     public void checkToken() {

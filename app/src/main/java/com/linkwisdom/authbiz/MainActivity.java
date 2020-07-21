@@ -22,13 +22,16 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     AuthUtils au;
 
-    String address;
     String userName;
     String token = "66d26512fa77cc5ff934201903dd7482";
+    String address = "1H1g2mUsqbRSp5MJuRDoyZmLYs1JiwbBfR";
+    Button bt1;
+    Button bt2;
+    Button bt3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,30 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
         au = new AuthUtils(this, Constant.DEBUG_SERVER);
 
-        Button bt1 = findViewById(R.id.authBt);
-        Button bt2 = findViewById(R.id.rachargeBt);
-        bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        bt1 = findViewById(R.id.bt1);
+        bt2 = findViewById(R.id.bt2);
+        bt3 = findViewById(R.id.bt3);
 
-//                sendIntent.putExtra("key", "66d26512fa77cc5ff934201903dd7482");//测试环境
-//        sendIntent.putExtra("key", "a6492c181a133355fcee1de3a8d12f15");//生产环境
+        bt1.setOnClickListener(this);
+        bt2.setOnClickListener(this);
+        bt3.setOnClickListener(this);
 
-                au.authApply("mytestapp", "66d26512fa77cc5ff934201903dd7482", "v0.0");
-
-            }
-        });
-        bt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                sendIntent.putExtra("key", "66d26512fa77cc5ff934201903dd7482");//测试环境
-//        sendIntent.putExtra("key", "a6492c181a133355fcee1de3a8d12f15");//生产环境
-
-                au.rechargeApply(token, 500, "王者农药充值","");
-
-            }
-        });
     }
 
     @Override
@@ -105,4 +92,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt1:
+                au.authApply("mytestapp", "66d26512fa77cc5ff934201903dd7482", "v0.0");
+                break;
+            case R.id.bt2:
+                au.rechargeApply(token, 500, "王者农药充值", "");
+                break;
+            case R.id.bt3:
+                au.withdrawApply(token, address, "http://www.baidu.com");
+                break;
+            default:
+                break;
+        }
+    }
 }
