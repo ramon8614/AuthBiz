@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bt1;
     Button bt2;
     Button bt3;
+    Button bt4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt1 = findViewById(R.id.bt1);
         bt2 = findViewById(R.id.bt2);
         bt3 = findViewById(R.id.bt3);
+        bt4 = findViewById(R.id.bt4);
 
         bt1.setOnClickListener(this);
         bt2.setOnClickListener(this);
         bt3.setOnClickListener(this);
+        bt4.setOnClickListener(this);
 
     }
 
@@ -87,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 double pay = data.getDoubleExtra("pay", 0d);
                 Log.e("ramon", isSuccess + "order:  " + order + " fee: " + fee + " pay: " + pay);
             }
+            if (requestCode == AuthUtils.WITHDRAW_APPLY) {
+                boolean isSuccess = data.getBooleanExtra("result", false);
+                String order = data.getStringExtra("consumptionCode");
+                double withdraw = data.getDoubleExtra("withdraw", 0d);
+                double fee = data.getDoubleExtra("fee", 0d);
+                Log.e("ramon", isSuccess + "order:  " + order + " withdraw: " + withdraw + " fee: " + fee);
+            }
 
         }
 
@@ -103,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt3:
                 au.withdrawApply(token, address, "http://www.baidu.com");
+                break;
+            case R.id.bt4:
+                au.is5Wave();
                 break;
             default:
                 break;

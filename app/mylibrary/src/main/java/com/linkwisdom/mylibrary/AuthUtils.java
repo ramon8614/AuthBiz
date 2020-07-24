@@ -2,9 +2,17 @@ package com.linkwisdom.mylibrary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.linkwisdom.mylibrary.http.Constant;
+
+import java.util.List;
 
 /**
  * @ProjectName: NBN
@@ -22,6 +30,7 @@ public class AuthUtils {
     public static final int AUTH_APPLY = 901;
     public static final int RECHARGE_APPLY = 905;
     public static final int WITHDRAW_APPLY = 906;
+    public static final String DOWNLAOD_URL = "https://www.5wave.io/Home#page8";
     private Activity activity;
 
     public AuthUtils(Activity activity) {
@@ -108,8 +117,67 @@ public class AuthUtils {
         activity.startActivityForResult(sendIntent, WITHDRAW_APPLY);
     }
 
-    public void checkToken() {
+    /**
+     * 验证是否有APP
+     *
+     * @return
+     */
+    private boolean checkApp() {
 
+        PackageManager packageManager = MyApplication.getInstance().getPackageManager();
+
+        List<PackageInfo> pInfo = packageManager.getInstalledPackages(0);
+
+        boolean isHave = false;
+
+        for (int i = 0; i < pInfo.size(); i++) {
+            String pn = pInfo.get(i).packageName;
+            if (pn.equals("com.lianzhihui.five")) {
+                isHave = true;
+            }
+        }
+        return isHave;
+
+    }
+
+    /**
+     * 下载app
+     */
+    private void download() {
+
+        // 创建构建器
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        // 设置参数
+        builder.setTitle("未安装《帝五波》")
+                .setMessage("是否跳转下载？")
+                .setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.action.VIEW");
+                        Uri content_url = Uri.parse(DOWNLAOD_URL);
+                        intent.setData(content_url);
+                        activity.startActivity(intent);
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+
+        builder.create().show();
+
+    }
+
+    /**
+     * 检测，并下载
+     */
+    public void is5Wave() {
+        if (!checkApp()) {
+            download();
+        }
     }
 
 }
