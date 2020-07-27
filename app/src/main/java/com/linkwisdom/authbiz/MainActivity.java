@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         au = new AuthUtils(this, Constant.DEBUG_SERVER);
-//        au.setServer(Constant.RELESESERVER);
+//        au = new AuthUtils(this, Constant.RELESESERVER);
         bt1 = findViewById(R.id.bt1);
         bt2 = findViewById(R.id.bt2);
         bt3 = findViewById(R.id.bt3);
