@@ -30,7 +30,8 @@ public class AuthUtils {
     public static final int AUTH_APPLY = 901;
     public static final int RECHARGE_APPLY = 905;
     public static final int WITHDRAW_APPLY = 906;
-    public static final String DOWNLAOD_URL = "https://www.5wave.io/Home#page8";
+    //    public static final String DOWNLAOD_URL = "https://www.5wave.io/Home#page8";
+    public static final String DOWNLAOD_URL = "https://d.5wave.io/index.html";
     private Activity activity;
 
     public AuthUtils(Activity activity) {
@@ -122,28 +123,36 @@ public class AuthUtils {
      *
      * @return
      */
-    private boolean checkApp() {
+    public boolean checkApp() {
 
         PackageManager packageManager = MyApplication.getInstance().getPackageManager();
 
         List<PackageInfo> pInfo = packageManager.getInstalledPackages(0);
 
         boolean isHave = false;
+        String packageName = "";
+
+        if (Constant.BASE_URL.equals("https://www.5wave.io")) {
+            packageName = "com.lianzhihui.five";
+        } else {
+            packageName = "com.lianzhihui.five2";
+        }
 
         for (int i = 0; i < pInfo.size(); i++) {
+
             String pn = pInfo.get(i).packageName;
-            if (pn.equals("com.lianzhihui.five")) {
+
+            if (pn.equals(packageName)) {
                 isHave = true;
             }
         }
         return isHave;
-
     }
 
     /**
      * 下载app
      */
-    private void download() {
+    public void download() {
 
         // 创建构建器
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
