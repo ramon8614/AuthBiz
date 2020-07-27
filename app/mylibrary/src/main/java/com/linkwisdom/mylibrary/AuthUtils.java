@@ -1,7 +1,6 @@
 package com.linkwisdom.mylibrary;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -60,18 +59,21 @@ public class AuthUtils {
      * @param version
      */
     public void authApply(String appName, String key, String version) {
-
-        //详细设置跳转
-        Intent sendIntent = new Intent();
-        sendIntent.setAction("com.lianzhihui.five.auth");
+        if (checkApp()) {
+            //详细设置跳转
+            Intent sendIntent = new Intent();
+            sendIntent.setAction("com.lianzhihui.five.auth");
 //                type = "text/plain"
-        String type = "text/plain";
-        sendIntent.setType(type);
+            String type = "text/plain";
+            sendIntent.setType(type);
 //                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        sendIntent.putExtra("appName", appName);
-        sendIntent.putExtra("key", key);
-        sendIntent.putExtra("version", version);
-        activity.startActivityForResult(sendIntent, AUTH_APPLY);
+            sendIntent.putExtra("appName", appName);
+            sendIntent.putExtra("key", key);
+            sendIntent.putExtra("version", version);
+            activity.startActivityForResult(sendIntent, AUTH_APPLY);
+        } else {
+            download();
+        }
     }
 
     /**
@@ -83,18 +85,19 @@ public class AuthUtils {
      * @param callbackUrl
      */
     public void rechargeApply(String token, int point, String chargeText, String callbackUrl) {
-
-        //详细设置跳转
-        Intent sendIntent = new Intent();
-        sendIntent.setAction("com.lianzhihui.five.recharge");
-        String type = "text/plain";
-        sendIntent.setType(type);
+        if (checkApp()) {
+            //详细设置跳转
+            Intent sendIntent = new Intent();
+            sendIntent.setAction("com.lianzhihui.five.recharge");
+            String type = "text/plain";
+            sendIntent.setType(type);
 //                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        sendIntent.putExtra("token", token);
-        sendIntent.putExtra("point", point);
-        sendIntent.putExtra("description", chargeText);
-        sendIntent.putExtra("callbackUrl", callbackUrl);
-        activity.startActivityForResult(sendIntent, RECHARGE_APPLY);
+            sendIntent.putExtra("token", token);
+            sendIntent.putExtra("point", point);
+            sendIntent.putExtra("description", chargeText);
+            sendIntent.putExtra("callbackUrl", callbackUrl);
+            activity.startActivityForResult(sendIntent, RECHARGE_APPLY);
+        }
     }
 
     /**
@@ -105,17 +108,18 @@ public class AuthUtils {
      * @param callbackUrl
      */
     public void withdrawApply(String token, String address, String callbackUrl) {
-
-        //详细设置跳转
-        Intent sendIntent = new Intent();
-        sendIntent.setAction("com.lianzhihui.five.withdraw");
-        String type = "text/plain";
-        sendIntent.setType(type);
+        if (checkApp()) {
+            //详细设置跳转
+            Intent sendIntent = new Intent();
+            sendIntent.setAction("com.lianzhihui.five.withdraw");
+            String type = "text/plain";
+            sendIntent.setType(type);
 //                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        sendIntent.putExtra("token", token);
-        sendIntent.putExtra("address", address);
-        sendIntent.putExtra("callbackUrl", callbackUrl);
-        activity.startActivityForResult(sendIntent, WITHDRAW_APPLY);
+            sendIntent.putExtra("token", token);
+            sendIntent.putExtra("address", address);
+            sendIntent.putExtra("callbackUrl", callbackUrl);
+            activity.startActivityForResult(sendIntent, WITHDRAW_APPLY);
+        }
     }
 
     /**
@@ -145,6 +149,9 @@ public class AuthUtils {
             if (pn.equals(packageName)) {
                 isHave = true;
             }
+        }
+        if (!isHave) {
+            download();
         }
         return isHave;
     }
