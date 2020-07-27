@@ -191,9 +191,7 @@ public class AuthUtils {
      * 检测，并下载
      */
     public void is5Wave() {
-        if (!checkApp()) {
-            download();
-        }
+        checkApp();
     }
 
 }
